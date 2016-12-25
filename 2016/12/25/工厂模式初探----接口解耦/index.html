@@ -84,13 +84,19 @@
 
 
 
+<meta name="description" content="以okGO框架来看;Step1：把http请求框架的共性方法抽取到接口中（也就是上述说的get/post/put/delete这些方法）
+1234public interface IRequestManger &amp;#123;    void get(String url,String Canchekey,Object o,IRequestCallback callback);    void Ins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My New Post">
-<meta property="og:url" content="http://yoursite.com/2016/12/24/My-New-Post/index.html">
+<meta property="og:title" content="Now or Never">
+<meta property="og:url" content="http://yoursite.com/2016/12/25/工厂模式初探----接口解耦/index.html">
 <meta property="og:site_name" content="Now or Never">
-<meta property="og:updated_time" content="2016-12-24T15:29:45.685Z">
+<meta property="og:description" content="以okGO框架来看;Step1：把http请求框架的共性方法抽取到接口中（也就是上述说的get/post/put/delete这些方法）
+1234public interface IRequestManger &amp;#123;    void get(String url,String Canchekey,Object o,IRequestCallback callback);    void Ins">
+<meta property="og:updated_time" content="2016-12-21T13:02:05.491Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My New Post">
+<meta name="twitter:title" content="Now or Never">
+<meta name="twitter:description" content="以okGO框架来看;Step1：把http请求框架的共性方法抽取到接口中（也就是上述说的get/post/put/delete这些方法）
+1234public interface IRequestManger &amp;#123;    void get(String url,String Canchekey,Object o,IRequestCallback callback);    void Ins">
 
 
 
@@ -108,7 +114,7 @@
   };
 </script>
 
-  <title> My New Post | Now or Never </title>
+  <title>  | Now or Never </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -228,7 +234,7 @@
             
             
               
-                My New Post
+                
               
             
           </h1>
@@ -240,8 +246,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-24T23:29:45+08:00" content="2016-12-24">
-              2016-12-24
+            <time itemprop="dateCreated" datetime="2016-12-25T17:46:06+08:00" content="2016-12-25">
+              2016-12-25
             </time>
           </span>
 
@@ -268,7 +274,16 @@
       
 
       
-        
+        <p>以okGO框架来看;<br>Step1：把http请求框架的共性方法抽取到接口中（也就是上述说的get/post/put/delete这些方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IRequestManger</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">get</span><span class="params">(String url,String Canchekey,Object o,IRequestCallback callback)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Instance</span><span class="params">(Application o)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Step2:用Volley来实现IRequestManager这个接口.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OKGoManager</span> <span class="keyword">implements</span> <span class="title">IRequestManger</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OKGoManager <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> SingleonHolder.INSTANCE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleonHolder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> OKGoManager INSTANCE = <span class="keyword">new</span> OKGoManager();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(String url, String Canchekey, Object o, <span class="keyword">final</span> IRequestCallback callback)</span> </span>&#123;</div><div class="line">        OkGo.get(url)</div><div class="line">                .tag(o)</div><div class="line">                .cacheKey(Canchekey)</div><div class="line">                .cacheMode(CacheMode.DEFAULT)</div><div class="line">                .execute(<span class="keyword">new</span> StringCallback() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(String s, Call call, Response response)</span> </span>&#123;</div><div class="line">                        callback.onSuccess(s);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Call call, Response response, Exception e)</span> </span>&#123;</div><div class="line"></div><div class="line">                        callback.onFailure(response.body().toString());</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Instance</span><span class="params">(Application o)</span> </span>&#123;</div><div class="line">        OkGo.init(o);</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Step3：创建一个类来返回IRequestManager请求接口的对象  //工厂类;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IRequestFactory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IRequestManger <span class="title">getRequestManager</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> OKGoManager.getInstance();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Step4:调用上述方法进行测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IRequestManager requestManager = RequestFactory.getRequestManager();</div></pre></td></tr></table></figure>
+<h2 id="接口-a-new-实现该接口的类"><a href="#接口-a-new-实现该接口的类" class="headerlink" title="接口 a = new 实现该接口的类();"></a>接口 a = new 实现该接口的类();</h2><p>衍生 java的接口是不能被实例化的,然而常见的点击事件中<br>new OnClickListener(){<br>……………<br>}<br>是用匿名内部类来完成的;</p>
+
       
     </div>
 
@@ -409,7 +424,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口-a-new-实现该接口的类"><span class="nav-number">1.</span> <span class="nav-text">接口 a = new 实现该接口的类();</span></a></li></ol></div>
             
           </div>
         </section>
